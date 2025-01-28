@@ -41,4 +41,14 @@ public class PlayerCharacterTests
 
         Assert.That(pc.Moves, Is.EqualTo(1));
     }
+    
+    [Test]
+    public void Given_PlayerCharacter_When_MoveUpIsCalled_Then_CoordinatesYIncreasedByOne()
+    {
+        // Create PlayerCharacter object
+        
+        // Call MoveUp method
+        
+        // Assert that coordinates y is increased by one
+    }
 }
