@@ -8,7 +8,7 @@ public class PlayerCharacterTests
     [Test]
     public void Given_PlayerCharacterWithLives_When_RemoveLifeCalled_Then_LivesDecreasedByOne()
     {
-        var pc = new PlayerCharacter
+        var pc = new PlayerCharacter(new())
         {
             Lives = 3
         };
@@ -21,7 +21,7 @@ public class PlayerCharacterTests
     [Test]
     public void Given_PlayerCharacterRemoveLifeCalled_When_LivesAreZero_Then_CorrectExceptionThrown()
     {
-        var pc = new PlayerCharacter
+        var pc = new PlayerCharacter(new())
         {
             Lives = 0
         };
@@ -32,7 +32,7 @@ public class PlayerCharacterTests
     [Test]
     public void Given_PlayerCharacter_When_IncrementMovesCalled_Then_MovesIncreasedByOne()
     {
-        var pc = new PlayerCharacter
+        var pc = new PlayerCharacter(new())
         {
             Moves = 0
         };
@@ -45,10 +45,7 @@ public class PlayerCharacterTests
     [Test]
     public void Given_PlayerCharacter_When_MoveUpIsCalled_Then_CoordinatesYIncreasedByOne()
     {
-        var pc = new PlayerCharacter
-        {
-            Coordinates = new Coordinates(0, 0)
-        };
+        var pc = new PlayerCharacter(new());
 
         pc.MoveUp();
 
@@ -58,10 +55,7 @@ public class PlayerCharacterTests
     [Test]
     public void Given_PlayerCharacter_When_MoveDownIsCalled_Then_CoordinatesYDecreasedByOne()
     {
-        var pc = new PlayerCharacter
-        {
-            Coordinates = new Coordinates(0, 0)
-        };
+        var pc = new PlayerCharacter(new());
 
         pc.MoveDown();
 
@@ -71,10 +65,7 @@ public class PlayerCharacterTests
     [Test]
     public void Given_PlayerCharacter_When_MoveLeftIsCalled_Then_CoordinatesXDecreasedByOne()
     {
-        var pc = new PlayerCharacter
-        {
-            Coordinates = new Coordinates(0, 0)
-        };
+        var pc = new PlayerCharacter(new());
 
         pc.MoveLeft();
 
@@ -84,10 +75,7 @@ public class PlayerCharacterTests
     [Test]
     public void Given_PlayerCharacter_When_MoveRightIsCalled_Then_CoordinatesXIncreasedByOne()
     {
-        var pc = new PlayerCharacter
-        {
-            Coordinates = new Coordinates(0, 0)
-        };
+        var pc = new PlayerCharacter(new());
 
         pc.MoveRight();
 
