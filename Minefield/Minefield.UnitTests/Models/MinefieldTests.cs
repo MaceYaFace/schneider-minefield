@@ -1,13 +1,15 @@
 ﻿namespace Minefield.UnitTests.Models;
 
+[TestFixture]
 public class MinefieldTests
 {
+    [Test]
     public void Given_Minefield_When_GenerateCellsCalled_Then_CellsGeneratedWithMines()
     {
-        // Create Minefield object
+        var minefield = new Minefield.Models.Minefield();
         
-        // Call GenerateCells
+        minefield.GenerateCells();
         
-        // Assert that cells generated and contains the correct proportion of mines
+        Assert.That(minefield.Cells.Count(c => c.IsMine), Is.EqualTo(25));
     }
 }
