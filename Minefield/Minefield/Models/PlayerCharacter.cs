@@ -4,7 +4,7 @@ public class PlayerCharacter
 {
     public uint Lives { get; set; }
     public uint Moves { get; set; }
-    public Coordinates Coordinates { get; set; }
+    public Coordinates Coordinates { get; init; } = new(0, 0);
     
     public void RemoveLife()
     {
