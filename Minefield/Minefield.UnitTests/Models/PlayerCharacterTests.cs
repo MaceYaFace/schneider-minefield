@@ -32,10 +32,13 @@ public class PlayerCharacterTests
     [Test]
     public void Given_PlayerCharacter_When_IncrementMovesCalled_Then_MovesIncreasedByOne()
     {
-        // Create PlayerCharacter object
-        
-        // Call IncrementMoves method
-        
-        // Assert that Moves property is increased by one
+        var pc = new PlayerCharacter
+        {
+            Moves = 0
+        };
+
+        pc.IncrementMoves();
+
+        Assert.That(pc.Moves, Is.EqualTo(1));
     }
 }

@@ -3,6 +3,7 @@
 public class PlayerCharacter
 {
     public uint Lives { get; set; }
+    public uint Moves { get; set; }
     
     public void RemoveLife()
     {
@@ -12,5 +13,10 @@ public class PlayerCharacter
         }
         
         Lives--;
+    }
+    
+    public void IncrementMoves()
+    {
+        Moves++;
     }
 }
