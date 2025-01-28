@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using Minefield.Models;
 
 namespace Minefield.UnitTests.Models;
 
@@ -8,20 +8,24 @@ public class PlayerCharacterTests
     [Test]
     public void Given_PlayerCharacterWithLives_When_RemoveLifeCalled_Then_LivesDecreasedByOne()
     {
-        // Create PlayerCharacter object
+        var pc = new PlayerCharacter
+        {
+            Lives = 3
+        };
 
-        // Call RemoveLife
+        pc.RemoveLife();
 
-        // Assert life removed
+        Assert.That(pc.Lives, Is.EqualTo(2));
     }
 
     [Test]
     public void Given_PlayerCharacterRemoveLifeCalled_When_LivesAreZero_Then_CorrectExceptionThrown()
     {
-        // Create PlayerCharacter object
+        var pc = new PlayerCharacter
+        {
+            Lives = 0
+        };
 
-        // Call RemoveLife
-
-        // Assert exception thrown
+        Assert.That(() => pc.RemoveLife(), Throws.Exception, "No lives left");
     }
 }
