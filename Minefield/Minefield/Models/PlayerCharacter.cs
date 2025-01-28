@@ -4,6 +4,7 @@ public class PlayerCharacter
 {
     public uint Lives { get; set; }
     public uint Moves { get; set; }
+    public Coordinates Coordinates { get; set; }
     
     public void RemoveLife()
     {
@@ -18,5 +19,10 @@ public class PlayerCharacter
     public void IncrementMoves()
     {
         Moves++;
+    }
+    
+    public void MoveUp()
+    {
+        Coordinates.Y++;
     }
 }
