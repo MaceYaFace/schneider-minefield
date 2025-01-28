@@ -28,4 +28,14 @@ public class PlayerCharacterTests
 
         Assert.That(() => pc.RemoveLife(), Throws.Exception, "No lives left");
     }
+    
+    [Test]
+    public void Given_PlayerCharacter_When_IncrementMovesCalled_Then_MovesIncreasedByOne()
+    {
+        // Create PlayerCharacter object
+        
+        // Call IncrementMoves method
+        
+        // Assert that Moves property is increased by one
+    }
 }
