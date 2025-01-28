@@ -1,11 +1,11 @@
 ﻿namespace Minefield.Models;
 
-public class PlayerCharacter
+public class PlayerCharacter(Coordinates startPosition, uint lives = 3, uint moves = 0)
 {
-    public uint Lives { get; set; }
-    public uint Moves { get; set; }
-    public Coordinates Coordinates { get; init; } = new(0, 0);
-    
+    public uint Lives { get; set; } = lives;
+    public uint Moves { get; set; } = moves;
+    public Coordinates Coordinates { get; init; } = startPosition;
+
     public void RemoveLife()
     {
         if (Lives <= 0)
