@@ -54,4 +54,43 @@ public class PlayerCharacterTests
 
         Assert.That(pc.Coordinates.Y, Is.EqualTo(1));
     }
+    
+    [Test]
+    public void Given_PlayerCharacter_When_MoveDownIsCalled_Then_CoordinatesYDecreasedByOne()
+    {
+        var pc = new PlayerCharacter
+        {
+            Coordinates = new Coordinates(0, 0)
+        };
+
+        pc.MoveDown();
+
+        Assert.That(pc.Coordinates.Y, Is.EqualTo(-1));
+    }
+    
+    [Test]
+    public void Given_PlayerCharacter_When_MoveLeftIsCalled_Then_CoordinatesXDecreasedByOne()
+    {
+        var pc = new PlayerCharacter
+        {
+            Coordinates = new Coordinates(0, 0)
+        };
+
+        pc.MoveLeft();
+
+        Assert.That(pc.Coordinates.X, Is.EqualTo(-1));
+    }
+    
+    [Test]
+    public void Given_PlayerCharacter_When_MoveRightIsCalled_Then_CoordinatesXIncreasedByOne()
+    {
+        var pc = new PlayerCharacter
+        {
+            Coordinates = new Coordinates(0, 0)
+        };
+
+        pc.MoveRight();
+
+        Assert.That(pc.Coordinates.X, Is.EqualTo(1));
+    }
 }

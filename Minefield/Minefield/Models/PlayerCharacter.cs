@@ -25,4 +25,19 @@ public class PlayerCharacter
     {
         Coordinates.Y++;
     }
+    
+    public void MoveDown()
+    {
+        Coordinates.Y--;
+    }
+    
+    public void MoveLeft()
+    {
+        Coordinates.X--;
+    }
+    
+    public void MoveRight()
+    {
+        Coordinates.X++;
+    }
 }
