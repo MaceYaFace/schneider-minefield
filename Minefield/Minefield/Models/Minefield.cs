@@ -1,31 +1,34 @@
-﻿namespace Minefield.Models;
+﻿using Minefield.Enums;
+
+namespace Minefield.Models;
 
 public class Minefield
 {
-    public Cell[] Cells { get; set; }
-    public int MaxWidth { get; set; }
-    public int MaxHeight { get; set; }
-    public int MineCount { get; set; }
+    public List<Cell> Cells { get; set; } = new();
+    public Coordinates MaxCoordinates { get; set; }
+    public uint MineCount { get; set; }
 
-    public void GenerateCells(float proportionMines = 0.25f, int maxWidth = 10, int maxHeight = 10)
+    public void GenerateCells(float proportionMines = 0.25f, int maxWidth = 3, int maxHeight = 3)
     {
         var rnd = new Random();
+
+        MaxCoordinates = new Coordinates(maxWidth - 1 , maxHeight - 1);
         
-        MaxWidth = maxWidth;
-        MaxHeight = maxHeight;
+        MineCount = (uint)Math.Floor(maxWidth * maxHeight * proportionMines);
         
-        var cellCount = MaxWidth * MaxHeight;
-        MineCount = (int)Math.Floor(cellCount * proportionMines);
-        
-        Cells = new Cell[cellCount];
-        for (var i = 0; i < cellCount; i++)
+        for (var x = 0; x < maxWidth; x++)
         {
-            Cells[i] = new Cell
+            for (var y = 0; y < maxHeight; y++)
             {
-                Coordinates = new Coordinates(i % MaxWidth, i / MaxWidth)
-            };
+                Cells.Add(new Cell
+                {
+                    Coordinates = new Coordinates(x, y),
+                    State = CellState.UncheckedSpace
+                });
+            }
+            
         }
         
-        Cells.OrderBy(c => rnd.Next()).Take(MineCount).ToList().ForEach(c => c.IsMine = true);
+        Cells.OrderBy(c => rnd.Next()).Take((int)MineCount).ToList().ForEach(c => c.State = CellState.UncheckedMine);
     }
 }

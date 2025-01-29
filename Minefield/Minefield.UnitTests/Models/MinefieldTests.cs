@@ -12,6 +12,6 @@ public class MinefieldTests
         
         minefield.GenerateCells(0.25f, 10, 10);
         
-        Assert.That(minefield.Cells.Count(c => c.IsMine), Is.EqualTo(25));
+        Assert.That(minefield.Cells.Count(c => c.State == CellState.UncheckedMine), Is.EqualTo(25));
     }
 }

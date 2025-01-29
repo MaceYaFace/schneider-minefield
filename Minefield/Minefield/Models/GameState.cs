@@ -2,8 +2,9 @@
 
 public class GameState
 {
-    public Cell[] Cells { get; set; }
+    public List<Cell> Cells { get; set; }
+    public Coordinates MaxCoordinates { get; set; }
     public uint Lives { get; set; }
     public uint Moves { get; set; }
-    public bool PlayerOnMine { get; set; }
+    public uint Wins { get; set; }
 }
