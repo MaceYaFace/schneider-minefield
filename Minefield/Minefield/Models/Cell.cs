@@ -1,5 +1,4 @@
-﻿using System.IO.IsolatedStorage;
-using Minefield.Enums;
+﻿using Minefield.Enums;
 
 namespace Minefield.Models;
 
