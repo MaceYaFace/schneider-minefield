@@ -1,4 +1,6 @@
-﻿namespace Minefield.Models;
+﻿using Minefield.Exceptions;
+
+namespace Minefield.Models;
 
 public class PlayerCharacter(Coordinates startPosition, uint lives = 3, uint moves = 0)
 {
@@ -10,7 +12,7 @@ public class PlayerCharacter(Coordinates startPosition, uint lives = 3, uint mov
     {
         if (Lives <= 0)
         {
-            throw new Exception("No lives left");
+            throw new OutOfLivesException();
         }
         
         Lives--;

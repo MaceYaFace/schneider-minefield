@@ -9,6 +9,7 @@ public class Game
     public static void Main(string[] args)
     {
         var serviceProvider = new ServiceCollection()
+            .AddLogging()
             .AddSingleton<IGameManagementService, GameManagementService>()
             .AddSingleton<IIoController, IoController>()
             .BuildServiceProvider();

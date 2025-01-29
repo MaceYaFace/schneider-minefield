@@ -1,10 +1,11 @@
-﻿using Minefield.Enums;
+﻿using Microsoft.Extensions.Logging;
+using Minefield.Enums;
 using Minefield.Helpers;
 using Minefield.Models;
 
 namespace Minefield.Services;
 
-public class GameManagementService : IGameManagementService
+public class GameManagementService(ILogger<IGameManagementService> logger) : IGameManagementService
 {
     private GameState _gameState = new();
     private Models.Minefield _minefield = new();
@@ -115,30 +116,39 @@ public class GameManagementService : IGameManagementService
                 return c;
             }).ToList();
         
-        _minefield.Cells = _minefield.Cells
-            .Select(c =>
-            {
-                if (c.Coordinates.IsEqual(_playerCharacter.Coordinates))
+        try
+        {
+            _minefield.Cells = _minefield.Cells
+                .Select(c =>
                 {
-                    switch (c.State)
+                    if (c.Coordinates.IsEqual(_playerCharacter.Coordinates))
                     {
-                        case CellState.UncheckedMine:
-                            c.State = CellState.PlayerOnMine;
-                            _playerCharacter.RemoveLife();
-                            _minefield.MineCount--;
-                            break;
-                        case CellState.UncheckedSpace:
-                        case CellState.CheckedSpace:
-                            c.State = CellState.Player;
-                            break;
-                        case CellState.DetonatedMine:
-                            c.State = CellState.PlayerOnDetonatedMine;
-                            break;
+                        switch (c.State)
+                        {
+                            case CellState.UncheckedMine:
+                                c.State = CellState.PlayerOnMine;
+                                _playerCharacter.RemoveLife();
+                                _minefield.MineCount--;
+                                break;
+                            case CellState.UncheckedSpace:
+                            case CellState.CheckedSpace:
+                                c.State = CellState.Player;
+                                break;
+                            case CellState.DetonatedMine:
+                                c.State = CellState.PlayerOnDetonatedMine;
+                                break;
+                        }
                     }
-                }
-                
-                return c;
-            }).ToList();
+
+                    return c;
+                }).ToList();
+        }
+        catch (OutOfMemoryException e)
+        {
+            logger.LogError($"{e}");
+            ResetGame();
+            return StartGame();
+        }
 
         if (_playerCharacter.Lives == 0)
         {
