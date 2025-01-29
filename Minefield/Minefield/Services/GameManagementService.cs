@@ -18,7 +18,9 @@ public class GameManagementService(ILogger<IGameManagementService> logger) : IGa
         var rnd = new Random();
         _minefield.GenerateCells();
         
-        var startCell = _minefield.Cells.OrderBy(_ => rnd.Next()).FirstOrDefault(c => c.State != CellState.UncheckedMine);
+        var startCell = _minefield.Cells
+            .Where(c => c.Coordinates.Y == 0)
+            .OrderBy(_ => rnd.Next()).FirstOrDefault(c => c.State != CellState.UncheckedMine);
         if (startCell == null)
         {
             startCell = _minefield.Cells.OrderBy(_ => rnd.Next()).FirstOrDefault();
@@ -174,7 +176,7 @@ public class GameManagementService(ILogger<IGameManagementService> logger) : IGa
             ResetGame();
             return StartGame();
         }
-        if (_minefield.MineCount == 0 || _minefield.Cells.Count(c => c.State == CellState.CheckedSpace) == _minefield.Cells.Count - _minefield.MineCount)
+        if (_minefield.MineCount == 0 || _minefield.Cells.Count(c => c.State == CellState.CheckedSpace) == _minefield.Cells.Count - _minefield.MineCount || _playerCharacter.Coordinates.Y == _minefield.MaxCoordinates.Y)
         {
             var wins = _gameState.Wins + 1;
             var lives = _playerCharacter.Lives;

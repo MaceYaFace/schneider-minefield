@@ -21,10 +21,12 @@ public class IoController(IGameManagementService gameManagementService) : IIoCon
         Console.WriteLine("Welcome to Minefield!");
         Console.WriteLine();
         Console.WriteLine("Use the arrow keys/WASD to move the player character.");
+        Console.WriteLine("Reach the top of the board to win!");
         Console.WriteLine("Press 'Q' to quit the game.");
         for (var cols = gameState.MaxCoordinates.Y; cols > -1; cols--)
         {
             Console.WriteLine();
+            Console.Write('|');
             for (var rows = 0; rows <= gameState.MaxCoordinates.X; rows++)
             {
                 var cell = gameState.Cells.FirstOrDefault(c => c.Coordinates.X == rows && c.Coordinates.Y == cols);
@@ -53,6 +55,7 @@ public class IoController(IGameManagementService gameManagementService) : IIoCon
                         break;
                 }
             }
+            Console.Write('|');
         }
         
         Console.WriteLine();
