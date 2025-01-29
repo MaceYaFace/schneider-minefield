@@ -27,7 +27,12 @@ public class IoController(IGameManagementService gameManagementService) : IIoCon
             Console.WriteLine();
             for (var rows = 0; rows <= gameState.MaxCoordinates.X; rows++)
             {
-                switch (gameState.Cells.FirstOrDefault(c => c.Coordinates.X == rows && c.Coordinates.Y == cols).State)
+                var cell = gameState.Cells.FirstOrDefault(c => c.Coordinates.X == rows && c.Coordinates.Y == cols);
+                if (cell == null)
+                {
+                    throw new Exception("Cell reference not found when drawing minefield");
+                }
+                switch (cell.State)
                 {
                     case CellState.UncheckedMine:
                     case CellState.UncheckedSpace:

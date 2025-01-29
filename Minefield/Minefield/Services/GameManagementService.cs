@@ -18,22 +18,26 @@ public class GameManagementService(ILogger<IGameManagementService> logger) : IGa
         var rnd = new Random();
         _minefield.GenerateCells();
         
-        var startCell = _minefield.Cells.OrderBy(c => rnd.Next()).First(c => c.State != CellState.UncheckedMine);
+        var startCell = _minefield.Cells.OrderBy(_ => rnd.Next()).FirstOrDefault(c => c.State != CellState.UncheckedMine);
         if (startCell == null)
         {
-            startCell = _minefield.Cells.OrderBy(c => rnd.Next()).FirstOrDefault();
+            startCell = _minefield.Cells.OrderBy(_ => rnd.Next()).FirstOrDefault();
+            if (startCell == null)
+            {
+                throw new Exception("Minefield has no cells");
+            }
             _minefield.Cells.Select(c => c).First(c => c == startCell).State = CellState.Player;
             _minefield.MineCount--;
 
             if (_minefield.MineCount == 0)
             {
-                _minefield.Cells.OrderBy(c => rnd.Next()).First(c => c != startCell).State = CellState.UncheckedMine;
+                _minefield.Cells.OrderBy(_ => rnd.Next()).First(c => c != startCell).State = CellState.UncheckedMine;
             }
 
             if (_minefield.MineCount == _minefield.Cells.Count - 2)
             {
-                var x = rnd.Next((int)Math.Min(startCell.Coordinates.X - 1, 0), (int)Math.Max(startCell.Coordinates.X + 1, 0));
-                var y = rnd.Next((int)Math.Min(startCell.Coordinates.Y - 1, 0), (int)Math.Max(startCell.Coordinates.Y + 1, 0));
+                var x = rnd.Next(Math.Min(startCell.Coordinates.X - 1, 0), Math.Max(startCell.Coordinates.X + 1, 0));
+                var y = rnd.Next(Math.Min(startCell.Coordinates.Y - 1, 0), Math.Max(startCell.Coordinates.Y + 1, 0));
                 
                 _minefield.Cells.Select(c => c).First(c => c.Coordinates.X == x && c.Coordinates.Y == y).State = CellState.UncheckedMine;
             }
@@ -145,7 +149,7 @@ public class GameManagementService(ILogger<IGameManagementService> logger) : IGa
         }
         catch (OutOfMemoryException e)
         {
-            logger.LogError($"{e}");
+            logger.LogWarning($"{e}");
             ResetGame();
             return StartGame();
         }
