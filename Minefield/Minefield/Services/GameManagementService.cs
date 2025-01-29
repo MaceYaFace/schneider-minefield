@@ -67,27 +67,44 @@ public class GameManagementService(ILogger<IGameManagementService> logger) : IGa
 
     public GameState HandleInput(ConsoleKeyInfo key)
     {
+        var currentCoordinates = new Coordinates(_playerCharacter.Coordinates.X, _playerCharacter.Coordinates.Y);
         switch (key.Key)
         {
             case ConsoleKey.W:
             case ConsoleKey.UpArrow:
                 _playerCharacter.MoveUp();
                 _playerCharacter.Coordinates.EnforceBoundaries(_minefield.MaxCoordinates);
+                if (!currentCoordinates.IsEqual(_playerCharacter.Coordinates))
+                {
+                    _playerCharacter.Moves++;
+                }
                 return UpdateGameState();
             case ConsoleKey.S:
             case ConsoleKey.DownArrow:
                 _playerCharacter.MoveDown();
                 _playerCharacter.Coordinates.EnforceBoundaries(_minefield.MaxCoordinates);
+                if (!currentCoordinates.IsEqual(_playerCharacter.Coordinates))
+                {
+                    _playerCharacter.Moves++;
+                }
                 return UpdateGameState();
             case ConsoleKey.A:
             case ConsoleKey.LeftArrow:
                 _playerCharacter.MoveLeft();
                 _playerCharacter.Coordinates.EnforceBoundaries(_minefield.MaxCoordinates);
+                if (!currentCoordinates.IsEqual(_playerCharacter.Coordinates))
+                {
+                    _playerCharacter.Moves++;
+                }
                 return UpdateGameState();
             case ConsoleKey.D:
             case ConsoleKey.RightArrow:
                 _playerCharacter.MoveRight();
                 _playerCharacter.Coordinates.EnforceBoundaries(_minefield.MaxCoordinates);
+                if (!currentCoordinates.IsEqual(_playerCharacter.Coordinates))
+                {
+                    _playerCharacter.Moves++;
+                }
                 return UpdateGameState();
             case ConsoleKey.Q:
                 Environment.Exit(0);
