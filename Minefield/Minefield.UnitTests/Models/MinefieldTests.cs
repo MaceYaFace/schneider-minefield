@@ -1,4 +1,6 @@
-﻿namespace Minefield.UnitTests.Models;
+﻿using Minefield.Enums;
+
+namespace Minefield.UnitTests.Models;
 
 [TestFixture]
 public class MinefieldTests
@@ -8,7 +10,7 @@ public class MinefieldTests
     {
         var minefield = new Minefield.Models.Minefield();
         
-        minefield.GenerateCells();
+        minefield.GenerateCells(0.25f, 10, 10);
         
         Assert.That(minefield.Cells.Count(c => c.IsMine), Is.EqualTo(25));
     }
