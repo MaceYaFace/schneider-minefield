@@ -5,7 +5,7 @@ namespace Minefield.Models;
 public class Minefield
 {
     public List<Cell> Cells { get; set; } = new();
-    public Coordinates MaxCoordinates { get; set; }
+    public Coordinates MaxCoordinates { get; set; } = new();
     public uint MineCount { get; set; }
 
     public void GenerateCells(float proportionMines = 0.25f, int maxWidth = 3, int maxHeight = 3)
