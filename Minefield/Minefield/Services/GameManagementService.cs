@@ -127,8 +127,6 @@ public class GameManagementService(ILogger<IGameManagementService> logger) : IGa
                         c.State = CellState.CheckedSpace;
                         break;
                     case CellState.PlayerOnDetonatedMine:
-                        c.State = CellState.DetonatedMine;
-                        break;
                     case CellState.PlayerOnMine:
                         c.State = CellState.DetonatedMine;
                         break;
